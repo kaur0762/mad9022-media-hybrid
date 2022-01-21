@@ -1,0 +1,139 @@
+:root {
+    --color-p1: #3C1766;
+    --color-p2: #6226A6;
+    --color-p3: #8834E6;
+    --color-p4: #8F38F2;
+    --color-white: #fff;
+}
+
+body{
+    margin: 0;
+    background-color: #B494F5;
+    color: var(--color-white);
+    font-family: 'Roboto', sans-serif;
+}
+
+h2{
+    font-size: 1.7rem;
+    font-style: bolder;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://example.com/MaterialIcons-Regular.eot);
+    src: local('Material Icons'),
+        local('MaterialIcons-Regular'),
+        url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
+        url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
+        url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
+
+    color: var(--color-p1);
+}
+
+@media only screen and (min-width: 60em) {
+    section {
+        float: left;
+        width: 50%;
+    }
+}
+
+/*Player*/
+#player {
+    /* padding-left: 1em; */
+    padding-right: 1em;
+    padding-top: 3rem;
+}
+#player img{
+    width: 100%;
+    
+}
+.controls {
+    display: flex;
+    justify-content: center;
+}
+
+.btn{
+    padding: .5rem;
+}
+
+.progress-bar {
+    width: 100%;
+    padding: 3px;
+    border-radius: 6rem;
+    box-shadow: inset 0 1em 3em rgba(0, 0, 0, .2);
+}
+
+.progress-bar-fill {
+    display: block;
+    height: .5rem;
+    background-color: var(--color-p3);
+    border-radius: 6rem;
+}
+.timings{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 1rem;
+}
+
+#footer {
+    position: fixed;
+    padding: 1rem;
+    margin-right: 3rem;
+    bottom: 0;
+    width: 100%; 
+    height: 7rem;
+    background-color: var(--color-p1);
+}
+
+/*Playlist*/
+#playlist-area{
+    padding-bottom: 5rem;
+    /* margin-bottom: 5rem ; */
+}
+.songs img {
+    border-radius: 4px; 
+    padding: 5px;
+    width: 150px; 
+}
+
+.songs{
+    border: 1px solid #ddd;
+    border-radius: 4px; 
+    padding: 5px;
+    display: flex;
+    justify-content:space-between ;
+    background-color: var(--color-p2);
+    color: var(--color-white);
+    font-style: normal;
+}
+
+.songName{
+    font-size: 1.5rem;
+}
+
+.active{
+    background-color: var(--color-p1);
+}
+.songs:hover{
+    box-shadow: 0 0 2px 1px var(--color-p3);
+}
