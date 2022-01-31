@@ -1,14 +1,15 @@
 :root {
-    --color-p1: #3C1766;
-    --color-p2: #6226A6;
-    --color-p3: #8834E6;
-    --color-p4: #8F38F2;
+    --color-p1: 	#004c4c;
+    --color-p2: 	#006666;
+    --color-p3: #008080;
+    --color-p4: #66b2b2;
+    --color-plight: #b2d8d8;
     --color-white: #fff;
 }
 
 body{
     margin: 0;
-    background-color: #B494F5;
+    background-color: var(--color-plight);
     color: var(--color-white);
     font-family: 'Roboto', sans-serif;
 }
@@ -16,18 +17,6 @@ body{
 h2{
     font-size: 1.7rem;
     font-style: bolder;
-}
-
-@font-face {
-    font-family: 'Material Icons';
-    font-style: normal;
-    font-weight: 400;
-    src: url(https://example.com/MaterialIcons-Regular.eot);
-    src: local('Material Icons'),
-        local('MaterialIcons-Regular'),
-        url(https://example.com/MaterialIcons-Regular.woff2) format('woff2'),
-        url(https://example.com/MaterialIcons-Regular.woff) format('woff'),
-        url(https://example.com/MaterialIcons-Regular.ttf) format('truetype');
 }
 
 .material-icons {
@@ -105,6 +94,13 @@ h2{
     background-color: var(--color-p1);
 }
 
+audio{
+    visibility: hidden;
+}
+
+.hidden {
+    display: none;
+}
 /*Playlist*/
 #playlist-area{
     padding-bottom: 5rem;
