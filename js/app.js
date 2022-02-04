@@ -1,8 +1,50 @@
 import SONGS from './media.js';
 
 const APP = {
+    player: null,
+    audio: null,
+    btnPlay: null,
+    btnPause: null,
+    btnStop: null,
+    currentTrack: 0,
     init: () => {
+        (APP.player = document.getElementById('player')),
+        (APP.audio = document.getElementById('audio')),
+        (APP.btnPlay = document.getElementById('btnPlay')),
+        (APP.btnPause = document.getElementById('btnPause')),
+        (APP.btnStop = document.getElementById('btnStop')),
+        APP.addListeners();
         APP.playList();
+    },
+    addListeners: () => {
+        APP.btnPlay.addEventListener('click', APP.playTrack);
+        APP.btnPause.addEventListener('click', APP.pauseTrack);
+        APP.btnStop.addEventListener('click', APP.stopTrack);
+    },
+    playTrack: (ev) => {
+        // alert("hi");
+        if (!APP.audio.paused) return;                                  
+        APP.audio.src = SONGS[APP.currentTrack].src;
+        APP.audio.play();
+        document.getElementById('btnPlay').classList.add('hidden');
+        document.getElementById('btnPause').classList.remove('hidden');
+        APP.startAnimations();
+    },
+    pauseTrack: () => {
+        // alert("hi");
+        if (!APP.audio.played) return;
+        APP.audio.src = SONGS[APP.currentTrack].src;
+        APP.audio.pause();
+        document.getElementById('btnPlay').classList.remove('hidden');
+        document.getElementById('btnPause').classList.add('hidden');
+    },
+    stopTrack: (ev) => {
+        // alert("hi");
+        APP.audio.pause();
+        APP.audio.currentTime = 0;
+        document.getElementById('btnPlay').classList.remove('hidden');
+        document.getElementById('btnPause').classList.add('hidden');
+        APP.stopAnimations();
     },
     playList: () => {
         const ulTag = document.querySelector("ul");
@@ -14,11 +56,11 @@ const APP = {
                     <p class="artistName">${SONGS[i].artist}</p>
                 </div>
                 <span id="${SONGS[i].title}" class="audio-duration">00:00</span>
-                <audio class="${SONGS[i].title}" src="${SONGS[i].src}"></audio>
+                
                 </li>`;
     ulTag.insertAdjacentHTML("beforeend", liTag); 
-    console.log("hello");
-    }
+    //console.log("hello");
+    };
     },
 };
 APP.init();
