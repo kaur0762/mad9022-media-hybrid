@@ -15,6 +15,7 @@ const APP = {
         (APP.btnStop = document.getElementById('btnStop')),
         APP.addListeners();
         APP.playList();
+        APP.currentSong();
     },
     addListeners: () => {
         APP.btnPlay.addEventListener('click', APP.playTrack);
@@ -28,7 +29,7 @@ const APP = {
         APP.audio.play();
         document.getElementById('btnPlay').classList.add('hidden');
         document.getElementById('btnPause').classList.remove('hidden');
-        APP.startAnimations();
+        // APP.startAnimations();
     },
     pauseTrack: () => {
         // alert("hi");
@@ -44,13 +45,13 @@ const APP = {
         APP.audio.currentTime = 0;
         document.getElementById('btnPlay').classList.remove('hidden');
         document.getElementById('btnPause').classList.add('hidden');
-        APP.stopAnimations();
+        // APP.stopAnimations();
     },
     playList: () => {
-        const ulTag = document.querySelector("ul");
+    const ulTag = document.querySelector("ul");
     for (let i = 0; i < SONGS.length; i++) {
     let liTag = `<li li-index="${i + 1}" class="songs">
-                <img src="${SONGS[i].img}">
+                <img src="${SONGS[i].img}" alt="${SONGS[i].title}">
                 <div class="names">
                     <p class="songName">${SONGS[i].title}</p>
                     <p class="artistName">${SONGS[i].artist}</p>
@@ -61,6 +62,15 @@ const APP = {
     ulTag.insertAdjacentHTML("beforeend", liTag); 
     //console.log("hello");
     };
+    },
+    currentSong: () => {
+        const divTag = document.querySelector(".currentSong");
+            let songTag = `<img src="${SONGS[APP.currentTrack].img}" alt="${SONGS[APP.currentTrack].title}">
+                            <h2> ${SONGS[APP.currentTrack].title} </h2>
+                            <div id="audio-animation">
+                                <audio id="audio" src="${SONGS[APP.currentTrack].src}"></audio>
+                            </div>`;
+        divTag.insertAdjacentHTML("beforeend", songTag);
     },
 };
 APP.init();
