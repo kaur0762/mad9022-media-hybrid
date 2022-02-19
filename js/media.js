@@ -1,18 +1,18 @@
 const SONGS = [
     {
-        id: 0, title: "February Song" ,artist: "Joshan Groban",  src: "./media/february-song.mp3", img:"./media/february-song.jpg" 
+        title: "February Song" ,artist: "Joshan Groban",  src: "february-song", img:"february-song" 
     },
     {
-        id: 1, title: "Ghost" ,artist: "Justin Bieber",  src: "./media/ghost.mp3", img:"./media/ghost.jpg" 
+        title: "Ghost" ,artist: "Justin Bieber",  src: "ghost", img:"ghost" 
     },
     {
-        id: 2, title: "MONTERO" ,artist: "Lil Nias X",  src: "./media/montero.mp3", img:"./media/montero.jpg" 
+        title: "MONTERO" ,artist: "Lil Nias X",  src: "montero", img:"montero" 
     },
     {
-        id: 3, title: "White Inverson" ,artist: "Post Malone",  src: "./media/white-inverson.mp3", img:"./media/white-inverson.jpg" 
+        title: "White Inverson" ,artist: "Post Malone",  src: "white-inverson", img:"white-inverson" 
     },
     {
-        id: 4, title: "Yummy" ,artist: "Justin Bieber",  src: "./media/yummy.mp3", img:"./media/yummy.jpg" 
+        title: "Yummy" ,artist: "Justin Bieber",  src: "yummy", img:"yummy" 
     }
 ];
 

@@ -18,25 +18,29 @@
     <main class="media-player">
         <section id="player-area">
             <div id="player" class="is-playing">
-                <!-- <img src="" alt="" /> -->
-                <div class="currentSong"></div>
+                    <div class="img-area">
+                        <img src="" alt="">
+                        <!-- img goes here -->
+                    </div>
                 <div id="footer">
-                    <!-- <div id="visual"> -->
-                        <div id="progress-bar">
-                            <span class="progress-bar-fill" style="width: 70%;"></span>
+                    <div class="song-details">
+                        <p class="name"></p>
+                        <p class="artist"></p>
+                        <!-- song title and artist goes here -->
+                    </div>
+                    <div class="progress-area">
+                        <div class="progress-bar">
+                        <div class="progress-bar-fill"></div>
                         </div>
                         <div class="timings">
-                            <p>
-                                <time>00:00</time>
-                            </p>
-                            <p>
-                                <time>00:00</time>
-                            </p>
+                        <span class="current-time">0:00</span>
+                        <span class="max-duration">0:00</span>
                         </div>
-                        <div id="audio-animation">
-                            <audio id="audio" src="./media/february-song.mp3"></audio>
+                        <div class="audio">
+                            <!-- audio goes here -->
+                            <audio id="main-audio" src=""></audio>
                         </div>
-                    <!-- </div> -->
+                    </div>
                     <div id="controls" class="controls">
                         <div class="btn">
                             <button id="btnPrevious" class="buttons">
@@ -49,15 +53,15 @@
                             </button>
                         </div>
                         <div class="btn">
-                            <button id="btnPlay" class="playPause buttons">
+                            <button id="btnPlay" class="play-pause buttons">
                                 <span class="material-icons">play_arrow</span>
                             </button>
                         </div>
-                        <div class="btn">
+                        <!-- <div class="btn">
                             <button id="btnPause" class="playPause hidden buttons">
                                 <span class="material-icons">pause</span>
                             </button>
-                        </div>
+                        </div> -->
                         <div class="btn">
                             <button id="btnStop" class="buttons">
                                 <span class="material-icons">stop</span>
@@ -78,7 +82,6 @@
             </div>
         </section>
         <section id="playlist-area">
-            <h2>Playlist</h2>
             <div>
                 <ul>
                     <!-- here go li list from js -->

@@ -4,73 +4,118 @@ const APP = {
     player: null,
     audio: null,
     btnPlay: null,
-    btnPause: null,
     btnStop: null,
+    songName: null,
+    songArtist: null,
+    songImg: null,
+    mainAudio: null,
+    ulTag: null,
+    allLiTag: null,
     currentTrack: 0,
+    songIndex : Math.floor((Math.random() * SONGS.length) + 1),
+    isSongPaused : true,
     init: () => {
-        (APP.player = document.getElementById('player')),
-        (APP.audio = document.getElementById('audio')),
-        (APP.btnPlay = document.getElementById('btnPlay')),
-        (APP.btnPause = document.getElementById('btnPause')),
-        (APP.btnStop = document.getElementById('btnStop')),
+        APP.player = document.getElementById('player');
+        APP.audio = document.getElementById('audio');
+        APP.btnPlay = document.getElementById('btnPlay');
+        APP.btnStop = document.getElementById('btnStop');
+        APP.songName = document.querySelector(".song-details .name");
+        APP.songArtist = document.querySelector(".song-details .artist");
+        APP.songImg = document.querySelector(".img-area img");
+        APP.mainAudio = document.querySelector("#main-audio");
+        APP.ulTag = document.querySelector("ul");
+        APP.allLiTag = document.getElementsByClassName("songs");
         APP.addListeners();
         APP.playList();
         APP.currentSong();
+        APP.loadSong();
     },
     addListeners: () => {
         APP.btnPlay.addEventListener('click', APP.playTrack);
-        APP.btnPause.addEventListener('click', APP.pauseTrack);
         APP.btnStop.addEventListener('click', APP.stopTrack);
+        APP.ulTag.addEventListener('click', APP.currentSong);
     },
-    playTrack: (ev) => {
+    playMusic: (ev) => {
         // alert("hi");
-        if (!APP.audio.paused) return;                                  
-        APP.audio.src = SONGS[APP.currentTrack].src;
+        APP.player.classList.add("paused");
+        APP.btnPlay.querySelector("span").innerText = "pause";
         APP.audio.play();
-        document.getElementById('btnPlay').classList.add('hidden');
-        document.getElementById('btnPause').classList.remove('hidden');
         // APP.startAnimations();
     },
-    pauseTrack: () => {
+    playTrack: () =>{
+        const isSongPlay = APP.player.classList.contains("paused");
+        isSongPlay ? APP.pauseMusic() : APP.playMusic();
+        APP.currentSong();
+    },
+    pauseMusic: () => {
         // alert("hi");
-        if (!APP.audio.played) return;
-        APP.audio.src = SONGS[APP.currentTrack].src;
-        APP.audio.pause();
-        document.getElementById('btnPlay').classList.remove('hidden');
-        document.getElementById('btnPause').classList.add('hidden');
+        APP.player.classList.remove("paused");
+        APP.btnPlay.querySelector("span").innerText = "play_arrow";
+        APP.mainAudio.pause();
     },
     stopTrack: (ev) => {
         // alert("hi");
-        APP.audio.pause();
-        APP.audio.currentTime = 0;
-        document.getElementById('btnPlay').classList.remove('hidden');
-        document.getElementById('btnPause').classList.add('hidden');
+        // APP.mainAudio.pause();
+        APP.pauseMusic();
+        APP.mainAudio.currentTime = 0;
         // APP.stopAnimations();
     },
     playList: () => {
-    const ulTag = document.querySelector("ul");
-    for (let i = 0; i < SONGS.length; i++) {
-    let liTag = `<li li-index="${i + 1}" class="songs">
-                <img src="${SONGS[i].img}" alt="${SONGS[i].title}">
-                <div class="names">
-                    <p class="songName">${SONGS[i].title}</p>
-                    <p class="artistName">${SONGS[i].artist}</p>
-                </div>
-                <span id="${SONGS[i].title}" class="audio-duration">00:00</span>
-                
-                </li>`;
-    ulTag.insertAdjacentHTML("beforeend", liTag); 
-    //console.log("hello");
-    };
+        // const ulTag = document.querySelector("ul");
+        for (let i = 0; i < SONGS.length; i++){
+            let liTag = document.createElement("li");
+            liTag.setAttribute('data-index', i);
+            liTag.classList.add("songs");
+
+            if(i === APP.currentTrack){
+                liTag.classList.add("active");
+            }
+
+            liTag.innerHTML = `
+                        <img src="./media/${SONGS[i].img}.jpg" alt="${SONGS[i].title}">
+                        <div class="names">
+                            <p class="songName">${SONGS[i].title}</p>
+                            <p class="artistName">${SONGS[i].artist}</p>
+                        </div>
+                        <span id="${SONGS[i].title}" class="audio-duration">00:00</span>
+                        `;
+            APP.ulTag.append(liTag);
+            
+        }
+    },
+    loadSong: () => {
+        APP.songName.innerText = SONGS[APP.currentTrack].title;
+
+        APP.songArtist.innerText = SONGS[APP.currentTrack].artist;
+        
+        APP.songImg.src = `media/${SONGS[APP.currentTrack].img}.jpg`;
+
+        APP.mainAudio.src = `media/${SONGS[APP.currentTrack].src}.mp3`;
     },
     currentSong: () => {
-        const divTag = document.querySelector(".currentSong");
-            let songTag = `<img src="${SONGS[APP.currentTrack].img}" alt="${SONGS[APP.currentTrack].title}">
-                            <h2> ${SONGS[APP.currentTrack].title} </h2>
-                            <div id="audio-animation">
-                                <audio id="audio" src="${SONGS[APP.currentTrack].src}"></audio>
-                            </div>`;
-        divTag.insertAdjacentHTML("beforeend", songTag);
+        for (let i = 0; i < APP.allLiTag.length; i++) {
+            let audioTag = APP.allLiTag[i].querySelector(".audio-duration");
+
+            if(APP.allLiTag[i].classList.contains("active")){
+                APP.allLiTag[i].classList.remove("active");
+                let adDuration = audioTag.getAttribute("t-duration");
+                audioTag.innerText = adDuration;
+            }
+
+            if(APP.allLiTag[i].getAttribute("li-index") == APP.currentTrack){
+            APP.allLiTag[i].classList.add("active");
+            audioTag.innerText = "Playing";
+            }
+
+            APP.allLiTag[i].setAttribute("onclick", "clicked(this)");
+        }
     },
+    clicked: ()=> {
+        let getLiIndex = APP.allLiTag.getAttribute("li-index");
+        APP.songIndex = getLiIndex;
+        APP.loadSong(APP.songIndex);
+        APP.playTrack();
+        APP.currentSong();
+    }
 };
 APP.init();
