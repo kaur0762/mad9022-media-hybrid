@@ -5,6 +5,8 @@ const APP = {
     audio: null,
     btnPlay: null,
     btnStop: null,
+    btnPrev: null,
+    btnNext: null,
     songName: null,
     songArtist: null,
     songImg: null,
@@ -19,21 +21,26 @@ const APP = {
         APP.audio = document.getElementById('audio');
         APP.btnPlay = document.getElementById('btnPlay');
         APP.btnStop = document.getElementById('btnStop');
+        APP.btnPrev = document.getElementById('btnPrevious');
+        APP.btnNext = document.getElementById('btnNext');
         APP.songName = document.querySelector(".song-details .name");
         APP.songArtist = document.querySelector(".song-details .artist");
         APP.songImg = document.querySelector(".img-area img");
         APP.mainAudio = document.querySelector("#main-audio");
         APP.ulTag = document.querySelector("ul");
-        APP.allLiTag = document.getElementsByClassName("songs");
+        APP.allLiTag = APP.ulTag.getElementsByClassName("songs");
         APP.addListeners();
         APP.playList();
-        APP.currentSong();
+        // APP.currentSong();
         APP.loadSong();
     },
     addListeners: () => {
         APP.btnPlay.addEventListener('click', APP.playTrack);
         APP.btnStop.addEventListener('click', APP.stopTrack);
+        APP.btnPrev.addEventListener('click', APP.prevButton);
+        APP.btnNext.addEventListener('click', APP.nextButton);
         APP.ulTag.addEventListener('click', APP.currentSong);
+        // APP.allLiTag.addEventListener('click', APP.currentSong);
     },
     playMusic: (ev) => {
         // alert("hi");
@@ -59,6 +66,36 @@ const APP = {
         APP.pauseMusic();
         APP.mainAudio.currentTime = 0;
         // APP.stopAnimations();
+    },
+    prevButton: () => {
+        alert("hi");
+        APP.stopTrack();
+        APP.currentTrack = APP.prevTrack();
+        APP.loadSong();
+        APP.currentSong();
+        APP.playTrack();
+    },
+    prevTrack: () => {
+        let len = SONGS.length;
+        APP.currentTrack-- ;
+        if (APP.currentTrack < len) {
+            APP.currentTrack = 0;
+        }
+    },
+    nextButton: () => {
+        // alert("hi");
+        APP.stopTrack();
+        APP.currentTrack = APP.nextTrack();
+        APP.loadSong();
+        APP.currentSong();
+        APP.playTrack();
+    },
+    nextTrack: () => {
+        let len = SONGS.length;
+        APP.currentTrack++ ;
+        if (APP.currentTrack >= len) {
+            APP.currentTrack = 0;
+        }
     },
     playList: () => {
         // const ulTag = document.querySelector("ul");
@@ -102,18 +139,21 @@ const APP = {
                 audioTag.innerText = adDuration;
             }
 
-            if(APP.allLiTag[i].getAttribute("li-index") == APP.currentTrack){
+            if(APP.allLiTag[i].getAttribute("data-index") == APP.songIndex){
             APP.allLiTag[i].classList.add("active");
             audioTag.innerText = "Playing";
             }
 
-            APP.allLiTag[i].setAttribute("onclick", "clicked(this)");
+            // APP.allLiTag[i].setAttribute("onclick", "clicked(this)");
+            if(APP.allLiTag[i].clicked == true){
+                clicked(i);
+            }
         }
     },
-    clicked: ()=> {
-        let getLiIndex = APP.allLiTag.getAttribute("li-index");
-        APP.songIndex = getLiIndex;
-        APP.loadSong(APP.songIndex);
+    clicked: (element)=> {
+        let getLiIndex = element.getAttribute("data-index");
+        APP.currentTrack = getLiIndex;
+        APP.loadSong(APP.currentTrack);
         APP.playTrack();
         APP.currentSong();
     }
