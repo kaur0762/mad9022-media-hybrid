@@ -111,7 +111,7 @@ audio{
 /*Playlist*/
 #playlist-area{
     padding-bottom: 5rem;
-    /* margin-bottom: 5rem ; */
+    margin-bottom: 8rem ;
 }
 .songs img {
     border-radius: 4px; 
