@@ -8,6 +8,8 @@ const APP = {
     btnStop: null,
     btnPrev: null,
     btnNext: null,
+    btnReplay: null,
+    btnForward: null,
     currentTrack:0,
     init: () => {
         APP.player = document.getElementById('player');
@@ -17,17 +19,24 @@ const APP = {
         APP.btnStop = document.getElementById('btnStop');
         APP.btnPrev = document.getElementById('btnPrevious');
         APP.btnNext = document.getElementById('btnNext');
+        APP.btnReplay = document.getElementById('btnReplay');
+        APP.btnForward = document.getElementById('btnForward');
         APP.addEventListener();
         APP.playList();
         APP.loadSong(APP.currentTrack);
+        APP.playingSong();
     },
     addEventListener: () => {
         APP.btnPlay.addEventListener('click', APP.playTrack);
         APP.btnStop.addEventListener('click', APP.stopTrack);
         APP.btnPrev.addEventListener('click', APP.prevTrack);
         APP.btnNext.addEventListener('click', APP.nextTrack);
+        APP.btnReplay.addEventListener('click', APP.replayTrack);
+        APP.btnForward.addEventListener('click', APP.forwardTrack);
         APP.list.addEventListener('click', APP.currentSong);
         APP.audio.addEventListener('timeupdate', APP.timeUpdate);
+        APP.audio.addEventListener('ended', APP.trackEnded);
+        window.addEventListener('loaded', APP.playingSong());
     },
     playList: () => {
         // console.log('playlist added');
@@ -86,18 +95,27 @@ const APP = {
         APP.currentTrack--;
         APP.currentTrack < 1 ? APP.currentTrack = SONGS.length : APP.currentTrack = APP.currentTrack ;
         APP.loadSong(APP.currentTrack);
+        APP.playingSong();
     },
     nextTrack: () => {
         APP.stopTrack();
         APP.currentTrack++;
         APP.currentTrack > SONGS.length ? APP.currentTrack = 0 : APP.currentTrack = APP.currentTrack ;
         APP.loadSong(APP.currentTrack);
+        APP.playingSong();
+    },
+    replayTrack: () => {
+        APP.audio.currentTime -= 10;
+    },
+    forwardTrack: () => {
+        APP.audio.currentTime += 10;
     },
     currentSong: (ev) =>{
         let clickedElement = ev.target;
         let listItem = clickedElement.closest('.songs');
         APP.currentTrack = parseInt(listItem.getAttribute('data-index') ); 
         APP.loadSong(APP.currentTrack);
+        APP.playingSong();
     },
     timeUpdate: (ev) => {
         let progressBar = document.querySelector(".progress-bar-fill");
@@ -124,6 +142,21 @@ const APP = {
             currentSec = `0${currentSec}`;
         }
         musicCurrentTime.innerText = `${currentMin}:${currentSec}`; 
+    },
+    trackEnded: () => {
+        APP.nextTrack();
+        APP.audio.currentTime = 0;
+        APP.pauseMusic();
+    },
+    playingSong: () => {
+        const songs = document.querySelectorAll(".songs");
+        for (let i = 0; i < songs.length; i++) {
+            if (songs[i].getAttribute("data-index") == APP.currentTrack){
+                songs[i].classList.add("active");
+            } else {
+                songs[i].classList.remove("active");
+            }
+        }
     }
 };
 APP.init();
