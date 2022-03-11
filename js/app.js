@@ -31,6 +31,7 @@ const APP = {
     },
     playList: () => {
         // console.log('playlist added');
+        let ulTag = document.querySelector("#playlist-area ul");
         for (let i = 0; i < SONGS.length; i++){
         let liTag = document.createElement("li");
         liTag.setAttribute('data-index', i);
@@ -44,7 +45,7 @@ const APP = {
                         </div>
                         <time id="${SONGS[i].title}" class="audio-duration">00:00</time>
                         `;
-        document.querySelector("#playlist-area ul").append(liTag);
+                        ulTag.append(liTag);
         }
     },
     loadSong: (indexNumb) =>{
@@ -119,7 +120,7 @@ const APP = {
 
         let currentMin = Math.floor(currentTime / 60);
         let currentSec = Math.floor(currentTime % 60);
-        if(currentSec < 10){ //if sec is less than 10 then add 0 before it
+        if(currentSec < 10){
             currentSec = `0${currentSec}`;
         }
         musicCurrentTime.innerText = `${currentMin}:${currentSec}`; 
