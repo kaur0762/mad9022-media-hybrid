@@ -15,27 +15,32 @@
     <header>
         <h1>Kaur 0762</h1>
     </header>
-    <main>
+    <main class="media-player">
         <section id="player-area">
             <div id="player" class="is-playing">
-                <img src="./media/february-song.jpg" alt="track name" />
+                    <div class="img-area">
+                        <img src="" alt="">
+                        <!-- img goes here -->
+                    </div>
                 <div id="footer">
-                    <!-- <div id="visual"> -->
-                        <div id="progress-bar">
-                            <span class="progress-bar-fill" style="width: 70%;"></span>
+                    <div class="song-details">
+                        <p class="name"></p>
+                        <p class="artist"></p>
+                        <!-- song title and artist goes here -->
+                    </div>
+                    <div class="progress-area">
+                        <div class="progress-bar">
+                        <div class="progress-bar-fill"></div>
                         </div>
                         <div class="timings">
-                            <p>
-                                <time>00:00</time>
-                            </p>
-                            <p>
-                                <time>00:00</time>
-                            </p>
+                        <time class="current-time">0:00</time>
+                        <time class="max-duration">0:00</time>
                         </div>
-                        <div id="audio-animation">
-                            <audio></audio>
+                        <div class="audio">
+                            <!-- audio goes here -->
+                            <audio id="main-audio" src=""></audio>
                         </div>
-                    <!-- </div> -->
+                    </div>
                     <div id="controls" class="controls">
                         <div class="btn">
                             <button id="btnPrevious" class="buttons">
@@ -48,15 +53,15 @@
                             </button>
                         </div>
                         <div class="btn">
-                            <button id="btnPlay" class="playPause buttons">
+                            <button id="btnPlay" class="play-pause buttons">
                                 <span class="material-icons">play_arrow</span>
                             </button>
                         </div>
-                        <div class="btn">
+                        <!-- <div class="btn">
                             <button id="btnPause" class="playPause hidden buttons">
                                 <span class="material-icons">pause</span>
                             </button>
-                        </div>
+                        </div> -->
                         <div class="btn">
                             <button id="btnStop" class="buttons">
                                 <span class="material-icons">stop</span>
@@ -77,48 +82,13 @@
             </div>
         </section>
         <section id="playlist-area">
-            <h2>Playlist</h2>
-            <div class="songs active">
-                <img src="./media/february-song.jpg" alt="February Song">
-                <div class="names">
-                    <p class="songName">February Song</p>
-                    <p class="artistName">Joshan Groban</p>
-                </div>
-                <p class="time">00:00</p>
-            </div>
-            <div class="songs">
-                <img src="./media/ghost.jpg" alt="Ghost">
-                <div>
-                    <p class="songName">Ghost</p>
-                    <p class="artistName">Justin Bieber</p>
-                </div>
-                <p class="time">00:00</p>
-            </div>
-            <div class="songs">
-                <img src="./media/montero.jpg" alt="Montero">
-                <div>
-                    <p class="songName">MONTERO</p>
-                    <p class="artistName">Lil Nias X </p>
-                </div>
-                <p class="time">00:00</p>
-            </div>
-            <div class="songs">
-                <img src="./media/white-inverson.jpg" alt="White Inverson">
-                <div>
-                    <p class="songName">White Inverson</p>
-                    <p class="artistName">Post Malone</p>
-                </div>
-                <p class="time">00:00</p>
-            </div>
-            <div class="songs">
-                <img src="./media/yummy.jpg" alt="Yummy">
-                <div>
-                    <p class="songName">Yummy</p>
-                    <p class="artistName">Justin Bieber</p>
-                </div>
-                <p class="time">00:00</p>
+            <div>
+                <ul>
+                    <!-- here go li list from js -->
+                </ul>
             </div>
         </section>
     </main>
+    <script src="js/app.js" type="module"></script>
 </body>
 </html>
