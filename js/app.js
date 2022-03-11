@@ -27,6 +27,7 @@ const APP = {
         APP.btnPrev.addEventListener('click', APP.prevTrack);
         APP.btnNext.addEventListener('click', APP.nextTrack);
         APP.list.addEventListener('click', APP.currentSong);
+        APP.audio.addEventListener('timeupdate', APP.timeUpdate);
     },
     playList: () => {
         // console.log('playlist added');
@@ -97,5 +98,31 @@ const APP = {
         APP.currentTrack = parseInt(listItem.getAttribute('data-index') ); 
         APP.loadSong(APP.currentTrack);
     },
+    timeUpdate: (ev) => {
+        let progressBar = document.querySelector(".progress-bar-fill");
+        const currentTime = ev.target.currentTime;
+        const duration = ev.target.duration;
+        let progressWidth = (currentTime / duration) * 100;
+        progressBar.style.width = `${progressWidth}%`;
+
+        let musicCurrentTime = document.querySelector(".current-time"),
+        musicDuartion = document.querySelector(".max-duration");
+        APP.audio.addEventListener("loadeddata", ()=>{
+            let mainAdDuration = APP.audio.duration;
+            let totalMin = Math.floor(mainAdDuration / 60);
+            let totalSec = Math.floor(mainAdDuration % 60);
+            if(totalSec < 10){ 
+                totalSec = `0${totalSec}`;
+            }
+            musicDuartion.innerText = `${totalMin}:${totalSec}`;
+        });
+
+        let currentMin = Math.floor(currentTime / 60);
+        let currentSec = Math.floor(currentTime % 60);
+        if(currentSec < 10){ //if sec is less than 10 then add 0 before it
+            currentSec = `0${currentSec}`;
+        }
+        musicCurrentTime.innerText = `${currentMin}:${currentSec}`; 
+    }
 };
 APP.init();
