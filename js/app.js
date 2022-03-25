@@ -93,14 +93,14 @@ const APP = {
     prevTrack: () => {
         APP.stopTrack();
         APP.currentTrack--;
-        APP.currentTrack < 1 ? APP.currentTrack = SONGS.length : APP.currentTrack = APP.currentTrack ;
+        APP.currentTrack < 1 ? APP.currentTrack = SONGS.length - 1 : APP.currentTrack = APP.currentTrack ;
         APP.loadSong(APP.currentTrack);
         APP.playingSong();
     },
     nextTrack: () => {
         APP.stopTrack();
         APP.currentTrack++;
-        APP.currentTrack > SONGS.length ? APP.currentTrack = 0 : APP.currentTrack = APP.currentTrack ;
+        APP.currentTrack > SONGS.length - 1 ? APP.currentTrack = 0 : APP.currentTrack = APP.currentTrack ;
         APP.loadSong(APP.currentTrack);
         APP.playingSong();
     },
