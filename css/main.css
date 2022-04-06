@@ -35,8 +35,11 @@ h2{
     text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
     font-feature-settings: 'liga';
-
     color: var(--color-p1);
+}
+
+.volume-btn{
+    padding-top: 2.2rem;
 }
 
 @media only screen and (min-width: 60em) {
@@ -156,6 +159,7 @@ audio{
     width: 5rem;
     height: 5rem;
     border-radius: 50%;
+    padding-top: 0.8rem;
 }
 
 .stuff{
