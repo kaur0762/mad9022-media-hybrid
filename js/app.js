@@ -66,6 +66,8 @@ const APP = {
         
         document.querySelector(".img-area img").src = `media/${SONGS[indexNumb].img}.jpg`;
 
+        document.querySelector(".stuff img").src = `media/${SONGS[indexNumb].img}.jpg`;
+
         document.querySelector("#main-audio").src = `media/${SONGS[indexNumb].src}.mp3`;
     },
     playMusic: (ev) => {
