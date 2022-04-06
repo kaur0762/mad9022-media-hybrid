@@ -10,6 +10,8 @@ const APP = {
     btnNext: null,
     btnReplay: null,
     btnForward: null,
+    btnVolume: null,
+    unmute: null,
     currentTrack:0,
     init: () => {
         APP.player = document.getElementById('player');
@@ -21,6 +23,7 @@ const APP = {
         APP.btnNext = document.getElementById('btnNext');
         APP.btnReplay = document.getElementById('btnReplay');
         APP.btnForward = document.getElementById('btnForward');
+        APP.btnVolume = document.getElementById('btnVolume');
         APP.addEventListener();
         APP.playList();
         APP.loadSong(APP.currentTrack);
@@ -33,6 +36,7 @@ const APP = {
         APP.btnNext.addEventListener('click', APP.nextTrack);
         APP.btnReplay.addEventListener('click', APP.replayTrack);
         APP.btnForward.addEventListener('click', APP.forwardTrack);
+        APP.btnVolume .addEventListener('click', APP.muteTrack);
         APP.list.addEventListener('click', APP.currentSong);
         APP.audio.addEventListener('timeupdate', APP.timeUpdate);
         APP.audio.addEventListener('ended', APP.trackEnded);
@@ -161,6 +165,18 @@ const APP = {
             } else {
                 songs[i].classList.remove("active");
             }
+        }
+    },
+    muteTrack: () => {
+        let audio = APP.audio.classList.contains('mute');
+        if(audio){
+            APP.audio.muted = false;
+            APP.audio.classList.remove("mute");
+            APP.btnVolume.querySelector("span").innerText = "volume_up";
+        } else {
+            APP.audio.muted = true;
+            APP.audio.classList.add("mute");
+            APP.btnVolume.querySelector("span").innerText = "volume_mute";
         }
     }
 };
