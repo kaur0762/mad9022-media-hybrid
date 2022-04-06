@@ -66,6 +66,8 @@ const APP = {
         
         document.querySelector(".img-area img").src = `media/${SONGS[indexNumb].img}.jpg`;
 
+        document.querySelector(".stuff img").src = `media/${SONGS[indexNumb].img}.jpg`;
+
         document.querySelector("#main-audio").src = `media/${SONGS[indexNumb].src}.mp3`;
     },
     playMusic: (ev) => {
@@ -73,12 +75,14 @@ const APP = {
         APP.player.classList.add("paused");
         APP.btnPlay.querySelector("span").innerText = "pause";
         APP.audio.play();
+        APP.player.classList.add("is-playing");
     },
     pauseMusic: () => {
         // console.log('song paused');
         APP.player.classList.remove("paused");
         APP.btnPlay.querySelector("span").innerText = "play_arrow";
         APP.audio.pause();
+        APP.player.classList.remove("is-playing");
     },
     playTrack: () =>{
         const isSongPlay = APP.player.classList.contains("paused");
@@ -116,6 +120,7 @@ const APP = {
         APP.currentTrack = parseInt(listItem.getAttribute('data-index') ); 
         APP.loadSong(APP.currentTrack);
         APP.playingSong();
+        APP.playMusic();
     },
     timeUpdate: (ev) => {
         let progressBar = document.querySelector(".progress-bar-fill");

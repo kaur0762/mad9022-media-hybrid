@@ -52,7 +52,7 @@ h2{
     padding-right: 1em;
     padding-top: 3rem;
 }
-#player img{
+img{
     width: 100%;
     
 }
@@ -139,4 +139,27 @@ audio{
 }
 .songs:hover{
     box-shadow: 0 0 2px 1px var(--color-p3);
+}
+
+/* Animation*/
+.is-playing .stuff img{
+    animation: rotate 2s infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.stuff img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+
+.stuff{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
