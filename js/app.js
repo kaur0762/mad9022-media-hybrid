@@ -120,6 +120,7 @@ const APP = {
         APP.currentTrack = parseInt(listItem.getAttribute('data-index') ); 
         APP.loadSong(APP.currentTrack);
         APP.playingSong();
+        APP.playMusic();
     },
     timeUpdate: (ev) => {
         let progressBar = document.querySelector(".progress-bar-fill");
